@@ -61,6 +61,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				academic: {
+					purple: 'hsl(var(--academic-purple))',
+					'purple-light': 'hsl(var(--academic-purple-light))',
+					'purple-dark': 'hsl(var(--academic-purple-dark))',
+					blue: 'hsl(var(--academic-blue))',
+					'blue-light': 'hsl(var(--academic-blue-light))',
+					'blue-dark': 'hsl(var(--academic-blue-dark))',
+					'deep-blue': 'hsl(var(--academic-deep-blue))',
+					black: 'hsl(var(--academic-black))'
 				}
 			},
 			borderRadius: {
