@@ -18,7 +18,8 @@ interface AppSidebarProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Home", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Learning Resources", href: "/courses", icon: BookOpen },
   { name: "Paper Management", href: "/papers", icon: FileText },
   { name: "Scheduling", href: "/schedule", icon: Calendar },
@@ -47,7 +48,7 @@ export function AppSidebar({ isOpen, onClose }: AppSidebarProps) {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed lg:static inset-y-0 left-0 z-50 w-64 glass-card border-r backdrop-blur-md"
+            className="fixed lg:static inset-y-0 left-0 z-50 w-64 glass-card border-r backdrop-blur-md lg:block"
           >
             <div className="flex h-full flex-col">
               <div className="flex items-center justify-between p-4 border-b">

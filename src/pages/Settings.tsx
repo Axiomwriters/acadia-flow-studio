@@ -9,6 +9,7 @@ import { Switch } from "@/components/ui/switch"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { User, Shield, Bell, Palette, Download, Camera } from "lucide-react"
+import { SettingsNavigation } from "@/components/settings/SettingsNavigation"
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -261,52 +262,39 @@ export default function Settings() {
         </p>
       </motion.div>
 
-      {/* Settings Navigation */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <motion.div
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="space-y-2"
-        >
-          {settingSections.map((section, index) => (
-            <Button
-              key={section.title}
-              variant={activeSection === index ? "default" : "ghost"}
-              onClick={() => setActiveSection(index)}
-              className={`w-full justify-start gap-3 ${
-                activeSection === index 
-                  ? "gradient-primary text-white" 
-                  : "hover:bg-muted"
-              }`}
-            >
-              <section.icon className="h-5 w-5" />
-              {section.title}
-            </Button>
-          ))}
-        </motion.div>
+      {/* Settings Navigation Cards */}
+      <SettingsNavigation 
+        activeSection={activeSection} 
+        onSectionChange={setActiveSection} 
+      />
 
-        {/* Settings Content */}
-        <motion.div
-          key={activeSection}
-          initial={{ x: 20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="lg:col-span-3"
-        >
-          <Card className="glass-card p-6">
-            <div className="flex items-center gap-3 mb-6">
-              {React.createElement(settingSections[activeSection].icon, { 
-                className: "h-6 w-6 text-primary" 
-              })}
-              <h2 className="text-xl font-semibold">
+      {/* Settings Content */}
+      <motion.div
+        key={activeSection}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Card className="glass-card p-8">
+          <div className="flex items-center gap-3 mb-8">
+            {React.createElement(settingSections[activeSection].icon, { 
+              className: "h-8 w-8 text-primary" 
+            })}
+            <div>
+              <h2 className="text-2xl font-bold">
                 {settingSections[activeSection].title}
               </h2>
+              <p className="text-muted-foreground">
+                {activeSection === 0 && "Manage your personal information and academic profile"}
+                {activeSection === 1 && "Configure password and authentication settings"}
+                {activeSection === 2 && "Control your notification preferences"}
+                {activeSection === 3 && "Customize your app experience and preferences"}
+              </p>
             </div>
-            {settingSections[activeSection].content}
-          </Card>
-        </motion.div>
-      </div>
+          </div>
+          {settingSections[activeSection].content}
+        </Card>
+      </motion.div>
     </div>
   )
 }

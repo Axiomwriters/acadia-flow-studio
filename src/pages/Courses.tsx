@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { CourseCard } from "@/components/courses/CourseCard"
+import { VideoTutorialCard } from "@/components/courses/VideoTutorialCard"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -69,6 +70,49 @@ const mockCourses = [
   }
 ]
 
+const videoTutorials = [
+  {
+    title: "Getting Started with Machine Learning",
+    instructor: "Dr. Sarah Chen",
+    duration: "15:30",
+    thumbnail: "",
+    level: "Beginner" as const,
+    category: "AI/ML",
+    videoId: "dQw4w9WgXcQ",
+    description: "Learn the fundamentals of machine learning with practical examples"
+  },
+  {
+    title: "Advanced Neural Networks",
+    instructor: "Prof. Michael Johnson",
+    duration: "28:45",
+    thumbnail: "",
+    level: "Advanced" as const,
+    category: "Deep Learning",
+    videoId: "dQw4w9WgXcQ",
+    description: "Dive deep into neural network architectures and optimization techniques"
+  },
+  {
+    title: "React Hooks Masterclass",
+    instructor: "Emily Rodriguez",
+    duration: "22:15",
+    thumbnail: "",
+    level: "Intermediate" as const,
+    category: "Web Dev",
+    videoId: "dQw4w9WgXcQ",
+    description: "Master React Hooks with real-world examples and best practices"
+  },
+  {
+    title: "Database Optimization Techniques",
+    instructor: "Dr. James Wilson",
+    duration: "35:20",
+    thumbnail: "",
+    level: "Advanced" as const,
+    category: "Database",
+    videoId: "dQw4w9WgXcQ",
+    description: "Learn advanced database optimization and performance tuning"
+  }
+]
+
 export default function Courses() {
   const [activeTab, setActiveTab] = useState<"materials" | "tutorials">("materials")
   const [searchTerm, setSearchTerm] = useState("")
@@ -76,6 +120,11 @@ export default function Courses() {
   const filteredCourses = mockCourses.filter(course =>
     course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     course.description.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const filteredTutorials = videoTutorials.filter(tutorial =>
+    tutorial.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    tutorial.description.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
@@ -170,26 +219,35 @@ export default function Courses() {
         </Badge>
       </motion.div>
 
-      {/* Course Grid */}
+      {/* Content Grid */}
       <motion.div
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        key={activeTab}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {filteredCourses.map((course, index) => (
-          <CourseCard key={course.id} course={course} index={index} />
-        ))}
+        {activeTab === "materials" ? (
+          filteredCourses.map((course, index) => (
+            <CourseCard key={course.id} course={course} index={index} />
+          ))
+        ) : (
+          filteredTutorials.map((tutorial, index) => (
+            <VideoTutorialCard key={tutorial.title} {...tutorial} />
+          ))
+        )}
       </motion.div>
 
       {/* Empty State */}
-      {filteredCourses.length === 0 && (
+      {(activeTab === "materials" ? filteredCourses : filteredTutorials).length === 0 && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="text-center py-12"
         >
-          <p className="text-muted-foreground">No courses found matching your search.</p>
+          <p className="text-muted-foreground">
+            No {activeTab === "materials" ? "courses" : "tutorials"} found matching your search.
+          </p>
           <Button
             variant="ghost"
             onClick={() => setSearchTerm("")}

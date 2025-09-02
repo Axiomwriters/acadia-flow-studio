@@ -7,12 +7,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { BottomNavigation } from "@/components/layout/BottomNavigation";
+import { Footer } from "@/components/layout/Footer";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import Papers from "./pages/Papers";
 import Schedule from "./pages/Schedule";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
+          <Footer />
         </main>
       </div>
       
@@ -46,7 +49,8 @@ const App = () => (
       <BrowserRouter>
         <AppLayout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/papers" element={<Papers />} />
             <Route path="/schedule" element={<Schedule />} />
