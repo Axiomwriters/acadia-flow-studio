@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { User, Shield, Bell, Palette } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 
 interface SettingsNavigationProps {
   activeSection: number
@@ -36,23 +37,65 @@ const settingSections = [
 
 export function SettingsNavigation({ activeSection, onSectionChange }: SettingsNavigationProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      {settingSections.map((section, index) => {
-        const isActive = activeSection === index
-        return (
-          <motion.div
-            key={section.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
+    <>
+      {/* Mobile Carousel View */}
+      <div className="block md:hidden mb-8">
+        <Carousel className="w-full max-w-sm mx-auto">
+          <CarouselContent>
+            {settingSections.map((section, index) => {
+              const isActive = activeSection === index
+              return (
+                <CarouselItem key={section.title} className="basis-4/5">
+                  <div className="p-1">
+                    <Card
+                      className={`p-6 cursor-pointer transition-all duration-200 ${
+                        isActive 
+                          ? "ring-2 ring-primary shadow-lg bg-primary/5" 
+                          : "hover:shadow-md glass-card"
+                      }`}
+                      onClick={() => onSectionChange(index)}
+                    >
+                      <div className="flex flex-col items-center text-center gap-3">
+                        <div 
+                          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${section.color} flex items-center justify-center shadow-lg`}
+                        >
+                          <section.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className={`font-semibold ${isActive ? "text-primary" : "text-foreground"}`}>
+                            {section.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {section.description}
+                          </p>
+                        </div>
+                        
+                        {isActive && (
+                          <div className="h-1 bg-gradient-to-r from-primary to-accent rounded-full w-full" />
+                        )}
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              )
+            })}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+
+      {/* Desktop Grid View */}
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {settingSections.map((section, index) => {
+          const isActive = activeSection === index
+          return (
             <Card
-              className={`p-6 cursor-pointer transition-all duration-300 hover-lift ${
+              key={section.title}
+              className={`p-6 cursor-pointer transition-all duration-200 ${
                 isActive 
                   ? "ring-2 ring-primary shadow-lg bg-primary/5" 
-                  : "hover:shadow-md glass-card"
+                  : "hover:shadow-md glass-card hover:scale-105"
               }`}
               onClick={() => onSectionChange(index)}
             >
@@ -73,16 +116,12 @@ export function SettingsNavigation({ activeSection, onSectionChange }: SettingsN
               </div>
               
               {isActive && (
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  className="h-1 bg-gradient-to-r from-primary to-accent rounded-full mt-4"
-                />
+                <div className="h-1 bg-gradient-to-r from-primary to-accent rounded-full mt-4" />
               )}
             </Card>
-          </motion.div>
-        )
-      })}
-    </div>
+          )
+        })}
+      </div>
+    </>
   )
 }
