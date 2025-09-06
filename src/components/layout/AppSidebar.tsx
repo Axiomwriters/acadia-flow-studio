@@ -18,8 +18,7 @@ interface AppSidebarProps {
 }
 
 const navigation = [
-  { name: "Home", href: "/", icon: LayoutDashboard },
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Learning Resources", href: "/courses", icon: BookOpen },
   { name: "Paper Management", href: "/papers", icon: FileText },
   { name: "Scheduling", href: "/schedule", icon: Calendar },

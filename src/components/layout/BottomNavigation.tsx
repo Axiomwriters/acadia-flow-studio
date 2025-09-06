@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 
 const bottomNavItems = [
-  { name: "Home", href: "/", icon: Home },
+  { name: "Dashboard", href: "/", icon: Home },
   { name: "Courses", href: "/courses", icon: BookOpen },
   { name: "Calendar", href: "/schedule", icon: Calendar },
   { name: "Papers", href: "/papers", icon: FileText },

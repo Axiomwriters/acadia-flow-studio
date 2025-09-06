@@ -7,7 +7,7 @@ import { CalendarDays, FileText, TrendingUp } from "lucide-react"
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 overflow-hidden">
       {/* Welcome Section */}
       <motion.div
         initial={{ y: -20, opacity: 0 }}
