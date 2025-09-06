@@ -10,7 +10,7 @@ interface AppHeaderProps {
 }
 
 const desktopNavItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Courses", url: "/courses", icon: BookOpen },
   { title: "Calendar", url: "/schedule", icon: Calendar },
   { title: "Papers", url: "/papers", icon: FileText },
