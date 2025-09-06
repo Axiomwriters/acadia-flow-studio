@@ -1,8 +1,9 @@
 import { motion } from "framer-motion"
-import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useAuth } from "@/contexts/AuthContext"
 import { 
   BookOpen, 
   Calendar, 
@@ -19,6 +20,14 @@ import {
 } from "lucide-react"
 
 const Index = () => {
+  const navigate = useNavigate()
+  const { login } = useAuth()
+
+  const handleSignUp = () => {
+    // Mock sign-in process
+    login()
+    navigate('/dashboard')
+  }
   const features = [
     {
       icon: BookOpen,
@@ -96,11 +105,20 @@ const Index = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="gradient-primary text-lg px-8 py-4">
-            Start Your Free Trial
+          <Button 
+            size="lg" 
+            className="gradient-primary text-lg px-8 py-4"
+            onClick={handleSignUp}
+          >
+            Join Us
           </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-4">
-            Watch Demo
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="text-lg px-8 py-4"
+            onClick={handleSignUp}
+          >
+            How It Works
           </Button>
         </div>
 
@@ -149,25 +167,26 @@ const Index = () => {
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
             >
-              <NavLink to={feature.href}>
-                <Card className="glass-card p-8 h-full hover-lift cursor-pointer group">
-                  <div className="space-y-4">
-                    <div 
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
-                    >
-                      <feature.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                        {feature.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {feature.description}
-                      </p>
-                    </div>
+              <Card 
+                className="glass-card p-8 h-full hover-lift cursor-pointer group"
+                onClick={handleSignUp}
+              >
+                <div className="space-y-4">
+                  <div 
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
+                  >
+                    <feature.icon className="h-8 w-8 text-white" />
                   </div>
-                </Card>
-              </NavLink>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </Card>
             </motion.div>
           ))}
         </div>
@@ -230,11 +249,20 @@ const Index = () => {
               to achieve their academic goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="gradient-primary text-lg px-8 py-4">
-                Start Your Free Trial
+              <Button 
+                size="lg" 
+                className="gradient-primary text-lg px-8 py-4"
+                onClick={handleSignUp}
+              >
+                Join Us
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4">
-                Schedule a Demo
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-4"
+                onClick={handleSignUp}
+              >
+                How It Works
               </Button>
             </div>
           </div>

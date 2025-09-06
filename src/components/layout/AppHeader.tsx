@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { motion } from "framer-motion"
 import { NavLink, useLocation } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
 
 interface AppHeaderProps {
   onMenuToggle: () => void
@@ -19,6 +20,7 @@ const desktopNavItems = [
 
 export function AppHeader({ onMenuToggle }: AppHeaderProps) {
   const location = useLocation()
+  const { isAuthenticated } = useAuth()
 
   return (
     <motion.header 
@@ -44,40 +46,48 @@ export function AppHeader({ onMenuToggle }: AppHeaderProps) {
         </NavLink>
       </div>
 
-      <div className="flex-1 max-w-md mx-4 relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search courses, papers, schedules..."
-          className="pl-10 glass-card border-0 focus:ring-2 focus:ring-primary/50 animate-glow"
-        />
-      </div>
+      {isAuthenticated && (
+        <>
+          <div className="flex-1 max-w-md mx-4 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search courses, papers, schedules..."
+              className="pl-10 glass-card border-0 focus:ring-2 focus:ring-primary/50 animate-glow"
+            />
+          </div>
 
-      {/* Desktop Navigation */}
-      <div className="hidden lg:flex items-center gap-1 mx-6">
-        {desktopNavItems.map((item) => {
-          const isActive = location.pathname === item.url
-          return (
-            <NavLink
-              key={item.url}
-              to={item.url}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                isActive 
-                  ? "bg-primary text-primary-foreground shadow-lg" 
-                  : "hover:bg-muted text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <item.icon className="h-4 w-4" />
-              <span className="text-sm font-medium">{item.title}</span>
-            </NavLink>
-          )
-        })}
-      </div>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1 mx-6">
+            {desktopNavItems.map((item) => {
+              const isActive = location.pathname === item.url
+              return (
+                <NavLink
+                  key={item.url}
+                  to={item.url}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                    isActive 
+                      ? "bg-primary text-primary-foreground shadow-lg" 
+                      : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span className="text-sm font-medium">{item.title}</span>
+                </NavLink>
+              )
+            })}
+          </div>
+        </>
+      )}
+
+      {!isAuthenticated && <div className="flex-1" />}
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="relative hover-glow">
-          <Bell className="h-5 w-5" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full animate-pulse" />
-        </Button>
+        {isAuthenticated && (
+          <Button variant="ghost" size="icon" className="relative hover-glow">
+            <Bell className="h-5 w-5" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full animate-pulse" />
+          </Button>
+        )}
         <ThemeToggle />
       </div>
     </motion.header>

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -30,9 +31,10 @@ const navigation = [
 export function AppSidebar({ isOpen, onClose }: AppSidebarProps) {
   const location = useLocation()
   const navigate = useNavigate()
+  const { logout } = useAuth()
 
   const handleLogout = () => {
-    // Mock logout - redirect to sign-in page
+    logout()
     navigate("/")
     onClose()
   }
