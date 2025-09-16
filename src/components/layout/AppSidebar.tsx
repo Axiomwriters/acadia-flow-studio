@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
+import { UserProfile } from "@/components/dashboard/UserProfile"
 
 interface AppSidebarProps {
   isOpen: boolean
@@ -111,35 +112,7 @@ export function AppSidebar({ isOpen, onClose }: AppSidebarProps) {
 
               {/* User Profile Card */}
               <div className="p-4 mt-auto">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="glass-card p-4 rounded-xl border"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
-                        <User className="h-5 w-5 text-white" />
-                      </div>
-                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">Dr. Jane Doe</p>
-                      <p className="text-xs text-muted-foreground truncate">ID: AC-2024-001</p>
-                    </div>
-                  </div>
-                  
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleLogout}
-                    className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </Button>
-                </motion.div>
+                <UserProfile compact onLogout={handleLogout} />
               </div>
             </div>
           </motion.aside>
