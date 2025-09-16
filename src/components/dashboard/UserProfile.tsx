@@ -17,72 +17,64 @@ export function UserProfile({ compact = false, onLogout }: UserProfileProps) {
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 0.2 }}
     >
-      <Card className={`glass-card ${compact ? 'p-4' : 'p-6'} hover-glow`}>
-        <div className={`flex items-center gap-${compact ? '3' : '4'} mb-4`}>
-          <Avatar className={`${compact ? 'h-12 w-12' : 'h-16 w-16'} ring-2 ring-primary/20`}>
+      <Card className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-4 border rounded-xl">
+        {/* Header with Avatar, Info, and Settings */}
+        <div className="flex items-start gap-3 mb-4">
+          <Avatar className="h-12 w-12 bg-purple-500">
             <AvatarImage src="/placeholder-avatar.jpg" />
-            <AvatarFallback className="gradient-primary text-white text-lg font-semibold">
+            <AvatarFallback className="bg-purple-500 text-white text-lg font-semibold">
               JD
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <h3 className={`${compact ? 'text-base' : 'text-lg'} font-semibold truncate`}>Dr. Jane Doe</h3>
-            <p className="text-sm text-muted-foreground truncate">Academic ID: AC-2024-001</p>
-            {!compact && (
-              <Badge variant="secondary" className="mt-1">
-                PhD Student
-              </Badge>
-            )}
+            <h3 className="text-base font-semibold text-foreground">Dr. Jane Doe</h3>
+            <p className="text-sm text-muted-foreground">Academic ID: AC-2024-001</p>
+            <p className="text-sm text-foreground mt-0.5">PhD Student</p>
           </div>
-          {!compact && (
-            <Button variant="ghost" size="icon" className="hover-glow">
-              <Settings className="h-4 w-4" />
-            </Button>
-          )}
+          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+            <Settings className="h-4 w-4" />
+          </Button>
         </div>
         
-        {!compact && (
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-sm">
-              <Mail className="h-4 w-4 text-muted-foreground" />
-              <span>jane.doe@university.edu</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Phone className="h-4 w-4 text-muted-foreground" />
-              <span>+1 (555) 123-4567</span>
-            </div>
+        {/* Contact Information */}
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-2 text-sm">
+            <Mail className="h-4 w-4 text-muted-foreground" />
+            <span className="text-foreground">jane.doe@university.edu</span>
           </div>
-        )}
-        
-        {!compact && (
-          <div className="mt-4 pt-4 border-t">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Progress</span>
-              <span className="font-medium">78%</span>
-            </div>
-            <div className="mt-2 w-full bg-muted rounded-full h-2">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "78%" }}
-                transition={{ delay: 0.5, duration: 1 }}
-                className="gradient-primary h-2 rounded-full"
-              />
-            </div>
+          <div className="flex items-center gap-2 text-sm">
+            <Phone className="h-4 w-4 text-muted-foreground" />
+            <span className="text-foreground">+1 (555) 123-4567</span>
           </div>
-        )}
+        </div>
 
-        {onLogout && (
-          <div className={`${compact ? 'mt-3' : 'mt-4'} ${!compact && 'pt-4 border-t'}`}>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onLogout}
-              className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
+        {/* Progress Section */}
+        <div className="mb-4">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm text-muted-foreground">Progress</span>
+            <span className="text-sm font-medium text-foreground">78%</span>
           </div>
+          <div className="w-full bg-muted rounded-full h-2">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "78%" }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="bg-blue-500 h-2 rounded-full"
+            />
+          </div>
+        </div>
+
+        {/* Logout Button */}
+        {onLogout && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onLogout}
+            className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
+          </Button>
         )}
       </Card>
     </motion.div>
