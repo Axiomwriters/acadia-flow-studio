@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom"
-import { Home, BookOpen, Calendar, FileText, User } from "lucide-react"
+import { Home, BookOpen, Calendar, FileText, Settings } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 
@@ -8,7 +8,7 @@ const bottomNavItems = [
   { name: "Courses", href: "/courses", icon: BookOpen },
   { name: "Calendar", href: "/schedule", icon: Calendar },
   { name: "Papers", href: "/papers", icon: FileText },
-  { name: "Profile", href: "/settings", icon: User },
+  { name: "Settings", href: "/settings", icon: Settings },
 ]
 
 export function BottomNavigation() {

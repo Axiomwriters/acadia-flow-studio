@@ -1,4 +1,4 @@
-import { Search, Bell, Menu, Home, BookOpen, Calendar, FileText, User } from "lucide-react"
+import { Search, Bell, Menu, Home, BookOpen, Calendar, FileText, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
@@ -15,7 +15,7 @@ const desktopNavItems = [
   { title: "Courses", url: "/courses", icon: BookOpen },
   { title: "Calendar", url: "/schedule", icon: Calendar },
   { title: "Papers", url: "/papers", icon: FileText },
-  { title: "Profile", url: "/settings", icon: User },
+  { title: "Settings", url: "/settings", icon: Settings },
 ]
 
 export function AppHeader({ onMenuToggle }: AppHeaderProps) {
@@ -83,7 +83,7 @@ export function AppHeader({ onMenuToggle }: AppHeaderProps) {
 
       <div className="flex items-center gap-2">
         {isAuthenticated && (
-          <Button variant="ghost" size="icon" className="relative hover-glow">
+          <Button variant="ghost" size="icon" className="relative hover-glow lg:hidden">
             <Bell className="h-5 w-5" />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full animate-pulse" />
           </Button>

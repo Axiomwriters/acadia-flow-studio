@@ -23,10 +23,8 @@ const Index = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const handleSignUp = () => {
-    // Mock sign-in process
-    login()
-    navigate('/dashboard')
+  const handleNavigateToLogin = () => {
+    navigate('/login')
   }
   const features = [
     {
@@ -108,7 +106,7 @@ const Index = () => {
           <Button 
             size="lg" 
             className="gradient-primary text-lg px-8 py-4"
-            onClick={handleSignUp}
+            onClick={handleNavigateToLogin}
           >
             Join Us
           </Button>
@@ -116,7 +114,7 @@ const Index = () => {
             size="lg" 
             variant="outline" 
             className="text-lg px-8 py-4"
-            onClick={handleSignUp}
+            onClick={handleNavigateToLogin}
           >
             How It Works
           </Button>
@@ -169,7 +167,7 @@ const Index = () => {
             >
               <Card 
                 className="glass-card p-8 h-full hover-lift cursor-pointer group"
-                onClick={handleSignUp}
+                onClick={handleNavigateToLogin}
               >
                 <div className="space-y-4">
                   <div 
@@ -252,7 +250,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 className="gradient-primary text-lg px-8 py-4"
-                onClick={handleSignUp}
+                onClick={handleNavigateToLogin}
               >
                 Join Us
               </Button>
@@ -260,7 +258,7 @@ const Index = () => {
                 size="lg" 
                 variant="outline" 
                 className="text-lg px-8 py-4"
-                onClick={handleSignUp}
+                onClick={handleNavigateToLogin}
               >
                 How It Works
               </Button>
